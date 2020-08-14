@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Alfiessa Widya
+                    Alfiessa Widya W
                 </div>
 
                 <div class="links">
