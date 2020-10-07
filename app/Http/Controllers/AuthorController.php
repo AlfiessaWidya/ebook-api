@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Author;
+use App\Book;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
-        return Author::get();
+        $data = Author::all();
+        $response = [
+            'msg' => 'All data of author',
+            'data' => $data
+        ];
+
+        return response()->json($response,200);
     }
 
     /**
@@ -25,38 +31,41 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
-        return Author::create([
-            "name" => $request->input('name'),
-            "date_of_birth" => $request->input('date_of_birth'),
-            "place_of_birth" => $request->input('place_of_birth'),
-            "gender" => $request->input('gender'),
-            "email" => $request->input('email'),
-            "hp" => $request->input('hp')
-        ]);
+        $data = Author::create($request->all());
+        $response = [
+            'msg' => 'author success created',
+            'data' => $data
+        ];
+
+        return response()->json($response,200);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
-        return Author::find($id);
+        $data = Author::find($id);
+        $response = [
+            'msg' => 'data of author',
+            'data' => $data
+        ];
+
+        return response()->json($response,200);
     }
 
     /**
@@ -75,28 +84,37 @@ class AuthorController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
-        return Author::find($id)->update([
-            "name" => $request->input('name'),
-            "date_of_birth" => $request->input('date_of_birth'),
-            "place_of_birth" => $request->input('place_of_birth'),
-            "gender" => $request->input('gender'),
-            "email" => $request->input('email'),
-            "hp" => $request->input('hp')
-        ]);
+        $data = Author::find($id);
+
+        $data->update($request->all());
+
+        $response = [
+            'msg' => 'data updated successfully',
+            'data' => $data
+        ];
+
+        return response()->json($response,200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        return Author::destroy($id);
+        $data = Author::find($id);
+        $data->delete();
+        $response = [
+            'msg' => 'data updated successfully',
+            'data' => $data
+        ];
+
+        return response()->json($response,200);
     }
 }

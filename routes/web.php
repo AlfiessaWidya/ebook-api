@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,3 @@ Route::get('/', function () {
 Route::get('me', function () {
     return;
 });
-
-Route::get('me', 'AuthController@me');
